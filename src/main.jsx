@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App.jsx'
 import './theme-variables.scss';
+import 'tiny-ui/dist/styles/index.css';
+
 import './index.css'
 
 
