@@ -3,6 +3,7 @@ import './App.css'
 import TodoWrapper from './components/TodoWrapper/TodoWrapper'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Outlet, useLocation, useOutlet } from 'react-router-dom';
 
 
 function App() {
@@ -29,17 +30,27 @@ function App() {
 
   }
 
-  // console.log('Log: ', todos)
+  const path = useLocation()
+
+  console.log('Log: ', path)
 
   return (
     <>
       <ToastContainer />
 
-      <div className='w-1/5 mx-auto mt-10'>
-        <div className='mb-6'><input className='w-full border border-blue-900 p-3 rounded' type="text" onKeyDown={(e) => handleAddTodo(e)}/></div>
+      <div className={`flex gap-3 mx-auto mt-10 bg-red-400 ${path.pathname === '/' ? 'w-1/5' : 'w-2/5'}`}>
+        <div class='flex-1'>
+          <div className='mb-6'><input className='w-full border border-blue-900 p-3 rounded' type="text" onKeyDown={(e) => handleAddTodo(e)}/></div>
 
-        <TodoWrapper todos={todos} handleRemoveTodo={handleRemoveTodo}/>
+          <TodoWrapper todos={todos} handleRemoveTodo={handleRemoveTodo}/>
+        </div>
+        <div className={`flex-1 ${path.pathname === "/tags" ? 'block' : 'hidden'}`}>
+          <Outlet></Outlet>
+        </div>
+ 
+        
       </div>
+
 
     </>
     
